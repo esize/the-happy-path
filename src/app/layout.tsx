@@ -1,6 +1,8 @@
 import { appConfig } from "@/app-config";
 import "@/app/globals.css";
+import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
+import { Providers } from "@/providers/providers";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
@@ -37,8 +39,13 @@ export default function RootLayout({
           GeistMono.variable
         )}
       >
-        <NextTopLoader />
-        {children}
+        <Providers>
+          <NextTopLoader />
+          <div className="flex flex-col w-full">
+            <div>{children}</div>
+          </div>
+        </Providers>
+        <Toaster />
       </body>
     </html>
   );
