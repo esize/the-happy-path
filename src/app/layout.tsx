@@ -1,12 +1,16 @@
+import type { Metadata } from "next";
+
+import { GeistMono } from "geist/font/mono";
+import { GeistSans } from "geist/font/sans";
+import NextTopLoader from "nextjs-toploader";
+
 import { appConfig } from "@/app-config";
 import "@/app/globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 import { Providers } from "@/providers/providers";
-import { GeistMono } from "geist/font/mono";
-import { GeistSans } from "geist/font/sans";
-import type { Metadata } from "next";
-import NextTopLoader from "nextjs-toploader";
+
+import { Header } from "./_header/header";
 
 const { mode } = appConfig;
 
@@ -41,7 +45,8 @@ export default function RootLayout({
       >
         <Providers>
           <NextTopLoader />
-          <div className="flex flex-col w-full">
+          <div className="flex w-full flex-col">
+            <Header />
             <div>{children}</div>
           </div>
         </Providers>
