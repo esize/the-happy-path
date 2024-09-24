@@ -15,6 +15,7 @@
     "lucide-react": "^0.445.0",
     "mono": "link:geist/font/mono",
     "next": "14.2.13",
+    "nextjs-toploader": "^3.6.15",
     "react": "^18",
     "react-dom": "^18",
     "sans": "link:geist/font/sans",

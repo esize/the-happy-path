@@ -1,12 +1,26 @@
-import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
+import { appConfig } from "@/app-config";
+import "@/app/globals.css";
+import { cn } from "@/lib/utils";
 import { GeistMono } from "geist/font/mono";
+import { GeistSans } from "geist/font/sans";
+import type { Metadata } from "next";
+import NextTopLoader from "nextjs-toploader";
 
-import "./globals.css";
+const { mode } = appConfig;
 
 export const metadata: Metadata = {
   title: "The Happy Path",
   description: "Welcome to the easiest way to get up and running with Next.js!",
+  openGraph:
+    mode === "comingSoon"
+      ? {
+          title: "The Happy Path",
+          description: "The Next.js Starter Kit sure to keep you smiling.",
+          url: "https://happypath.pro",
+          siteName: "The Happy Path",
+          type: "website",
+        }
+      : undefined,
 };
 
 export default function RootLayout({
@@ -15,10 +29,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${GeistSans.variable} ${GeistMono.variable} antialiased`}
+        className={cn(
+          "min-h-screen bg-background antialiased",
+          GeistSans.variable,
+          GeistMono.variable
+        )}
       >
+        <NextTopLoader />
         {children}
       </body>
     </html>
