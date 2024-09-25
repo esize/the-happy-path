@@ -1,7 +1,3 @@
-import { accounts, sessions, users } from "./auth";
+import { sessions, users } from "./auth";
 
-export const schema = {
-  users,
-  accounts,
-  sessions,
-};
+export { sessions, users };

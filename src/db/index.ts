@@ -3,7 +3,7 @@ import postgres from "postgres";
 
 import { env } from "@/env";
 
-import { schema } from "./schema";
+import * as schema from "./schema";
 
 let database: PostgresJsDatabase<typeof schema>;
 let pg: ReturnType<typeof postgres>;
