@@ -12,4 +12,11 @@ export const cardStyles =
 
 export const headerStyles = "bg-slate-50 dark:bg-slate-900";
 
-export const tabStyles = "bg-gray-200 dark:bg-slate-800 max-h-fit";
+export const tabStyles = "bg-inherit max-h-fit";
+
+export const btnIconStyles = "w-4 h-4";
+
+export const btnStyles = "flex gap-2 items-center";
+
+export const socialIconStyles =
+  "cursor-pointer dark:hover:fill-slate-400 w-8 h-8 dark:fill-white";
