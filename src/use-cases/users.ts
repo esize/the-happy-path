@@ -3,6 +3,7 @@ import { animals, colors, uniqueNamesGenerator } from "unique-names-generator";
 import {
   createUser,
   deleteUser,
+  getUser,
   getUserByUsername,
   verifyPassword,
 } from "@/data-access/users";
@@ -51,4 +52,9 @@ export async function signInUseCase(username: string, password: string) {
   }
 
   return { id: user.id };
+}
+
+export async function getUserDisplayNameUseCase(id: number) {
+  const user = await getUser(id);
+  return user?.name;
 }

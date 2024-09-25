@@ -13,12 +13,16 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { getCurrentUser } from "@/lib/session";
+import { getUserDisplayNameUseCase } from "@/use-cases/users";
 
 import { HeaderLinks } from "./header-links";
 import { MenuButton } from "./menu-button";
 import { SignOutItem } from "./sign-out-item";
 
 export async function Header() {
+  const user = await getCurrentUser();
+
   return (
     <div className="px-5 md:px-6">
       <div className="mx-auto flex w-full max-w-7xl justify-between py-4">
@@ -37,7 +41,7 @@ export async function Header() {
             </span>
           </Link>
 
-          <HeaderLinks isAuthenticated={false} />
+          <HeaderLinks isAuthenticated={!!user} />
         </div>
 
         <div className="flex items-center justify-between gap-5">
@@ -49,15 +53,21 @@ export async function Header() {
 }
 
 async function ProfileAvatar() {
+  const user = await getCurrentUser();
+  console.log(user);
+  const name = await getUserDisplayNameUseCase(user?.id!);
   return (
     <Avatar>
-      <AvatarFallback>{"AA"}</AvatarFallback>
+      <AvatarFallback>
+        {name?.substring(0, 2).toUpperCase() ?? "BB"}
+      </AvatarFallback>
     </Avatar>
   );
 }
 
 async function HeaderActions() {
-  const isSignedIn = true;
+  const user = await getCurrentUser();
+  const isSignedIn = !!user;
   return (
     <>
       {isSignedIn ? (
