@@ -4,7 +4,6 @@ export const appConfig: {
   mode: "live",
 };
 
-export const protectedRoutes = ["/purchases", "/dashboard"];
 export const applicationName = "The Happy Path";
 export const companyName = "WoolHomes";
 
@@ -18,4 +17,4 @@ export const VERIFY_EMAIL_TTL = 1000 * 60 * 60 * 24 * 7; // 7 days
 export const MAX_GROUP_LIMIT = 10;
 export const MAX_GROUP_PREMIUM_LIMIT = 50;
 
-export const afterLoginUrl = "/dashboard";
+export const afterLoginUrl = "/";

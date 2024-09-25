@@ -1,31 +1,12 @@
-import {
-  index,
-  pgEnum,
-  pgTable,
-  serial,
-  text,
-  timestamp,
-} from "drizzle-orm/pg-core";
+import { index, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
 
-export const roleEnum = pgEnum("role", ["member", "admin"]);
-export const accountTypeEnum = pgEnum("type", ["username"]);
-
-export const users = pgTable(
-  "hp_user",
-  {
-    id: serial("id").primaryKey(),
-    name: text("name").notNull(),
-    accountType: accountTypeEnum("accountType").notNull().default("username"),
-    username: text("username").unique(),
-    password: text("password"),
-    salt: text("salt"),
-  },
-  (table) => ({
-    userIdAccountTypeIdx: index("user_id_account_type_idx").on(
-      table.accountType
-    ),
-  })
-);
+export const users = pgTable("hp_user", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  username: text("username").unique(),
+  password: text("password"),
+  salt: text("salt"),
+});
 
 export const sessions = pgTable(
   "hp_session",
