@@ -34,7 +34,7 @@ export class TokenExpiredError extends PublicError {
 
 export class LoginError extends PublicError {
   constructor() {
-    super("Invalid email or password");
+    super("Invalid username or password");
     this.name = "LoginError";
   }
 }
