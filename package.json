@@ -12,7 +12,8 @@
     "db:generate": "drizzle-kit generate --config=drizzle.config.ts",
     "db:studio": "pnpm drizzle-kit studio",
     "db:clear": "tsx ./src/db/clear.ts",
-    "db:reset": "npm run db:clear && npm run db:migrate"
+    "db:reset": "npm run db:clear && npm run db:migrate",
+    "db:start": "docker compose up -d --remove-orphans"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.0",
