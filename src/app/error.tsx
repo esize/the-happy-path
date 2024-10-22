@@ -4,7 +4,6 @@ import Link from "next/link";
 
 import { AUTHENTICATION_ERROR_MESSAGE } from "@/app/util";
 import { Button } from "@/components/ui/button";
-import { pageTitleStyles } from "@/util/styles";
 
 export default function ErrorPage({
   error,
@@ -19,7 +18,7 @@ export default function ErrorPage({
     <div className="container mx-auto min-h-screen space-y-8 py-12">
       {isAuthenticationError ? (
         <>
-          <h1 className={pageTitleStyles}>Oops! You Need to Be Logged In</h1>
+          <h1>Oops! You Need to Be Logged In</h1>
           <p className="text-lg">To access this page, please log in first.</p>
 
           <Button asChild>
@@ -28,7 +27,7 @@ export default function ErrorPage({
         </>
       ) : (
         <>
-          <h1 className={pageTitleStyles}>Oops! Something went wrong</h1>
+          <h1>Oops! Something went wrong</h1>
           <p className="text-lg">{error.message}</p>
         </>
       )}

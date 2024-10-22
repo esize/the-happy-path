@@ -12,11 +12,18 @@ if (env.NODE_ENV === "production") {
   pg = postgres(env.DATABASE_URL);
   database = drizzle(pg, { schema });
 } else {
-  if (!(global as any).database!) {
+  if (
+    !(global as unknown as { database: PostgresJsDatabase<typeof schema> })
+      .database!
+  ) {
     pg = postgres(env.DATABASE_URL);
-    (global as any).database = drizzle(pg, { schema });
+    (
+      global as unknown as { database: PostgresJsDatabase<typeof schema> }
+    ).database = drizzle(pg, { schema });
   }
-  database = (global as any).database;
+  database = (
+    global as unknown as { database: PostgresJsDatabase<typeof schema> }
+  ).database;
 }
 
 export { database, pg };

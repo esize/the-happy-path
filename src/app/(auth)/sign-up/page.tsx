@@ -19,7 +19,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { pageTitleStyles } from "@/util/styles";
 
 import { signUpAction } from "./actions";
 
@@ -56,7 +55,7 @@ export default function RegisterPage() {
 
   return (
     <div className="mx-auto max-w-[400px] space-y-6 py-24">
-      <h1 className={cn(pageTitleStyles, "text-center")}>Sign Up</h1>
+      <h1 className={cn("text-center")}>Sign Up</h1>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">

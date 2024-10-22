@@ -4,17 +4,15 @@ import { env } from "@/env";
 import { assertAuthenticated } from "@/lib/session";
 import { PublicError } from "@/use-cases/errors";
 
-function shapeErrors({ err }: any) {
-  const isAllowedError = err instanceof PublicError;
-  // let's all errors pass through to the UI so debugging locally is easier
-  const isDev = env.NODE_ENV === "development";
-  if (isAllowedError || isDev) {
-    console.error(err);
+function shapeErrors({ err }: { err: unknown }) {
+  if (err instanceof PublicError) {
+    const isDev = env.NODE_ENV === "development";
+    if (isDev) {
+      console.error(err);
+    }
     return {
       code: err.code ?? "ERROR",
-      message: `${!isAllowedError && isDev ? "DEV ONLY ENABLED - " : ""}${
-        err.message
-      }`,
+      message: `${!isDev ? "" : "DEV ONLY ENABLED - "}${err.message}`,
     };
   } else {
     return {

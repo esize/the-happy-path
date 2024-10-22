@@ -50,7 +50,7 @@ export default function RootLayout({
             <div>{children}</div>
           </div>
         </Providers>
-        <Toaster />
+        <Toaster richColors />
       </body>
     </html>
   );

@@ -1,6 +1,10 @@
 import crypto from "crypto";
+import { ExtractTablesWithRelations } from "drizzle-orm";
+import { PgTransaction } from "drizzle-orm/pg-core";
+import { PostgresJsQueryResultHKT } from "drizzle-orm/postgres-js";
 
 import { database } from "@/db";
+import * as schema from "@/db/schema";
 
 export async function generateRandomToken(length: number) {
   const buf = await new Promise<Buffer>((resolve, reject) => {
@@ -16,8 +20,14 @@ export async function generateRandomToken(length: number) {
   return buf.toString("hex").slice(0, length);
 }
 
-export async function createTransaction<T extends typeof database>(
-  cb: (trx: T) => void
+export async function createTransaction(
+  cb: (
+    tx: PgTransaction<
+      PostgresJsQueryResultHKT,
+      typeof schema,
+      ExtractTablesWithRelations<typeof schema>
+    >
+  ) => Promise<void>
 ) {
-  await database.transaction(cb as any);
+  await database.transaction(cb);
 }

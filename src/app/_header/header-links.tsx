@@ -20,7 +20,7 @@ export function HeaderLinks({ isAuthenticated }: { isAuthenticated: boolean }) {
       {!isLandingPage && isAuthenticated && (
         <div className="hidden items-center gap-2 md:flex">
           <Button
-            variant={"link"}
+            variant={"ghost"}
             asChild
             className="flex items-center justify-center gap-2"
           >
@@ -30,7 +30,7 @@ export function HeaderLinks({ isAuthenticated }: { isAuthenticated: boolean }) {
           </Button>
 
           <Button
-            variant={"link"}
+            variant={"ghost"}
             asChild
             className="flex items-center justify-center gap-2"
           >
@@ -40,7 +40,7 @@ export function HeaderLinks({ isAuthenticated }: { isAuthenticated: boolean }) {
           </Button>
 
           <Button
-            variant={"link"}
+            variant={"ghost"}
             asChild
             className="flex items-center justify-center gap-2"
           >

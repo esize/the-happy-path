@@ -24,7 +24,7 @@ export async function Header() {
   const user = await getCurrentUser();
 
   return (
-    <div className="px-5 md:px-6">
+    <div className="bg-muted/70 px-5 md:px-6">
       <div className="mx-auto flex w-full max-w-7xl justify-between py-4">
         <div className="flex items-center justify-between gap-10">
           <Link href="/" className="flex items-center gap-2">
@@ -55,10 +55,12 @@ export async function Header() {
 async function ProfileAvatar() {
   const user = await getCurrentUser();
   console.log(user);
-  const name = await getUserDisplayNameUseCase(user?.id!);
+  const name =
+    user?.id !== undefined ? await getUserDisplayNameUseCase(user?.id) : "";
+
   return (
-    <Avatar>
-      <AvatarFallback>
+    <Avatar className="">
+      <AvatarFallback className="bg-primary text-primary-foreground">
         {name?.substring(0, 2).toUpperCase() ?? "BB"}
       </AvatarFallback>
     </Avatar>
@@ -103,7 +105,7 @@ async function HeaderActions() {
         </>
       ) : (
         <>
-          <Button asChild variant="secondary">
+          <Button asChild variant="default">
             <Link href="/sign-in">Sign In</Link>
           </Button>
         </>

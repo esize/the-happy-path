@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getCurrentUser } from "@/lib/session";
 import { cn } from "@/lib/utils";
-import { btnIconStyles, btnStyles, headerStyles } from "@/util/styles";
 
 import { SettingsTab } from "./tabs-section";
 
@@ -18,10 +17,10 @@ export default async function SettingsPage({
 }) {
   return (
     <>
-      <div className={cn(headerStyles, "py-8")}>
+      <div className={cn("py-8")}>
         <div className="container mx-auto">
           <div className="flex justify-between">
-            <h1 className="text-4xl">Account Settings</h1>
+            <h1 className={cn()}>Account Settings</h1>
 
             <Suspense
               fallback={<Skeleton className="h-[40px] w-[160px] rounded" />}
@@ -43,9 +42,9 @@ export default async function SettingsPage({
 async function SwitchProfileButton() {
   const user = await getCurrentUser();
   return (
-    <Button asChild className={btnStyles}>
+    <Button asChild>
       <Link href={`/users/${user!.id}`}>
-        <SquareUser className={btnIconStyles} /> Switch to Profile
+        <SquareUser /> Switch to Profile
       </Link>
     </Button>
   );
