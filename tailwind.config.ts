@@ -68,6 +68,39 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      keyframes: {
+        "fade-in-up-slow": {
+          "0%": {
+            opacity: "0",
+            transform: "translateY(10px)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translateY(0)",
+          },
+        },
+        "float-super-slow": {
+          "0%, 100%": {
+            transform: "translateY(0)",
+          },
+          "50%": {
+            transform: "translateY(-10px)",
+          },
+        },
+        "pulse-slow": {
+          "0%, 100%": {
+            opacity: "0.2",
+          },
+          "50%": {
+            opacity: "0.3",
+          },
+        },
+      },
+      animation: {
+        "fade-in-up-slow": "fade-in-up-slow 1s ease-out",
+        "float-super-slow": "float-super-slow 5s ease-in-out infinite",
+        "pulse-slow": "pulse-slow 8s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+      },
     },
   },
   plugins: [tailwindCssAnimate, fluid],
