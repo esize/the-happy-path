@@ -1,13 +1,17 @@
+import fluid, { extract } from "fluid-tailwind";
 import type { Config } from "tailwindcss";
 import tailwindCssAnimate from "tailwindcss-animate";
 
 const config: Config = {
   darkMode: ["class"],
-  content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  content: {
+    files: [
+      "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+      "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+      "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    ],
+    extract,
+  },
   theme: {
     container: {
       center: true,
@@ -66,6 +70,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [tailwindCssAnimate],
+  plugins: [tailwindCssAnimate, fluid],
 };
 export default config;
