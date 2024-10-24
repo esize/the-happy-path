@@ -1,51 +1,34 @@
-import Link from "next/link";
-import { Suspense } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { assertAuthenticated } from "@/lib/session";
 
-import { SquareUser } from "lucide-react";
+import { Nav } from "./nav";
 
-import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
-import { getCurrentUser } from "@/lib/session";
-import { cn } from "@/lib/utils";
-
-import { SettingsTab } from "./tabs-section";
-
-export default async function SettingsPage({
+export default async function SettingsLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <>
-      <div className={cn("py-8")}>
-        <div className="container mx-auto">
-          <div className="flex justify-between">
-            <h1 className={cn()}>Account Settings</h1>
+  const user = await assertAuthenticated();
 
-            <Suspense
-              fallback={<Skeleton className="h-[40px] w-[160px] rounded" />}
-            >
-              <SwitchProfileButton />
-            </Suspense>
-          </div>
-        </div>
+  if (!user) {
+    return null;
+  }
+
+  return (
+    <div className="container mx-auto py-10">
+      <h1 className="mb-6 text-3xl font-bold">Settings</h1>
+      <div className="flex flex-col gap-6 md:flex-row">
+        <Card className="h-fit w-full md:sticky md:top-6 md:w-64">
+          <CardContent className="p-4">
+            <Nav />
+          </CardContent>
+        </Card>
+        <Card className="flex-1">
+          <CardContent className="max-h-[calc(100vh-8rem)] overflow-y-auto p-6">
+            {children}
+          </CardContent>
+        </Card>
       </div>
-      <Suspense fallback={<Skeleton className="h-[40px] w-full rounded" />}>
-        <SettingsTab />
-      </Suspense>
-
-      <div className="container mx-auto py-12">{children}</div>
-    </>
-  );
-}
-
-async function SwitchProfileButton() {
-  const user = await getCurrentUser();
-  return (
-    <Button asChild>
-      <Link href={`/users/${user!.id}`}>
-        <SquareUser /> Switch to Profile
-      </Link>
-    </Button>
+    </div>
   );
 }

@@ -54,7 +54,6 @@ export async function Header() {
 
 async function ProfileAvatar() {
   const user = await getCurrentUser();
-  console.log(user);
   const name =
     user?.id !== undefined ? await getUserDisplayNameUseCase(user?.id) : "";
 

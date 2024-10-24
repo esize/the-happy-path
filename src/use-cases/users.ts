@@ -25,7 +25,7 @@ export async function deleteUserUseCase(
 export async function registerUserUseCase(username: string, password: string) {
   const existingUser = await getUserByUsername(username);
   if (existingUser) {
-    throw new PublicError("An user with that email already exists.");
+    throw new PublicError("That username is already taken!");
   }
 
   const displayName = uniqueNamesGenerator({

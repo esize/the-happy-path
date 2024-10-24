@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { z } from "zod";
@@ -20,5 +21,6 @@ export const signInAction = unauthenticatedAction
   .handler(async ({ input }) => {
     const user = await signInUseCase(input.username, input.password);
     await setSession(user.id);
+    revalidatePath(afterLoginUrl);
     redirect(afterLoginUrl);
   });

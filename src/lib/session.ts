@@ -1,7 +1,6 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { NextResponse } from "next/server";
 import { cache } from "react";
 
 import { AuthenticationError } from "@/app/util";
@@ -15,9 +14,8 @@ export async function setSessionTokenCookie(
   token: string,
   expiresAt: Date
 ): Promise<void> {
-  const response = NextResponse.next();
-
-  response.cookies.set(SESSION_COOKIE_NAME, token, {
+  const cookieStore = await cookies();
+  cookieStore.set(SESSION_COOKIE_NAME, token, {
     httpOnly: true,
     sameSite: "lax",
     secure: env.NODE_ENV === "production",
@@ -27,9 +25,8 @@ export async function setSessionTokenCookie(
 }
 
 export async function deleteSessionTokenCookie(): Promise<void> {
-  const response = NextResponse.next();
-
-  response.cookies.set(SESSION_COOKIE_NAME, "", {
+  const cookieStore = await cookies();
+  cookieStore.set(SESSION_COOKIE_NAME, "", {
     httpOnly: true,
     sameSite: "lax",
     secure: env.NODE_ENV === "production",
@@ -38,7 +35,9 @@ export async function deleteSessionTokenCookie(): Promise<void> {
   });
 }
 export async function getSessionToken(): Promise<string | undefined> {
-  return (await cookies()).get(SESSION_COOKIE_NAME)?.value;
+  const sessionCookies = await cookies();
+
+  return sessionCookies.get(SESSION_COOKIE_NAME)?.value;
 }
 
 export const getCurrentUser = cache(async () => {
