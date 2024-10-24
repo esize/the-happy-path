@@ -179,7 +179,7 @@ export default function Component() {
                   className="w-full bg-gradient-to-r from-fuchsia-600 to-sky-600 font-bold text-white shadow-lg transition-all duration-500 ease-in-out hover:from-fuchsia-700 hover:to-sky-700 hover:shadow-xl"
                   size="lg"
                 >
-                  <Link href="https://github.com/esize/the-happy-path">
+                  <Link href="https://github.com/new?template_name=the-happy-path&template_owner=esize">
                     Get The Happy Path on GitHub
                   </Link>
                 </Button>

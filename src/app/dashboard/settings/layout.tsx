@@ -8,10 +8,10 @@ export default async function SettingsLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const user = await assertAuthenticated();
-
-  if (!user) {
-    return null;
+  try {
+    await assertAuthenticated();
+  } catch (error) {
+    throw error;
   }
 
   return (
