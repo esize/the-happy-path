@@ -3,13 +3,15 @@ import { animals, colors, uniqueNamesGenerator } from "unique-names-generator";
 import {
   createUser,
   deleteUser,
+  getAllUsers,
   getUser,
   getUserByUsername,
   verifyPassword,
 } from "@/data-access/users";
+import { getCurrentUser } from "@/lib/session";
 import { UserId, UserSession } from "@/use-cases/types";
 
-import { LoginError, PublicError } from "./errors";
+import { AuthenticationError, LoginError, PublicError } from "./errors";
 
 export async function deleteUserUseCase(
   authenticatedUser: UserSession,
@@ -58,3 +60,28 @@ export async function getUserDisplayNameUseCase(id: number) {
   const user = await getUser(id);
   return user?.name;
 }
+
+export async function getUserRoleUseCase(id: number) {
+  const user = await getUser(id);
+  return user?.role;
+}
+
+export async function listAllUsersUseCase(): Promise<SafeUser[]> {
+  const authenticatedUser = await getCurrentUser();
+
+  if (!authenticatedUser) {
+    throw new AuthenticationError();
+  }
+  const role = await getUserRoleUseCase(authenticatedUser.id);
+  if (role !== "global_admin") {
+    throw new PublicError("Only global admins can list all users");
+  }
+  return await getAllUsers();
+}
+
+export type SafeUser = {
+  id: number;
+  name: string;
+  username: string;
+  role: string;
+};

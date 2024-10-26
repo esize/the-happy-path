@@ -10,8 +10,6 @@ import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 import { Providers } from "@/providers/providers";
 
-import { Header } from "./_header/header";
-
 const { mode } = appConfig;
 
 export const metadata: Metadata = {
@@ -46,7 +44,6 @@ export default function RootLayout({
         <Providers>
           <NextTopLoader />
           <div className="flex w-full flex-col">
-            <Header />
             <div>{children}</div>
           </div>
         </Providers>

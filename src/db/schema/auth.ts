@@ -6,6 +6,9 @@ export const users = pgTable("hp_user", {
   username: text("username").unique(),
   password: text("password"),
   salt: text("salt"),
+  role: text("role", { enum: ["user", "admin", "global_admin"] })
+    .default("user")
+    .notNull(),
 });
 
 export const sessions = pgTable(

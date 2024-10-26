@@ -86,3 +86,16 @@ export async function getUserByUsername(username: string) {
 export async function updateUser(userId: UserId, updatedUser: Partial<User>) {
   await database.update(users).set(updatedUser).where(eq(users.id, userId));
 }
+
+export async function getAllUsers() {
+  const users = await database.query.users.findMany();
+
+  return users.map((user) => {
+    return {
+      id: user.id,
+      name: user.name,
+      username: user.username!,
+      role: user.role,
+    };
+  });
+}

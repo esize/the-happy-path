@@ -42,7 +42,15 @@ export async function getSessionToken(): Promise<string | undefined> {
 
 export const getCurrentUser = cache(async () => {
   const { user } = await validateRequest();
-  return user;
+  if (!user) {
+    return null;
+  }
+  return {
+    id: user.id,
+    name: user.name,
+    username: user.username,
+    role: user.role,
+  };
 });
 
 export const assertAuthenticated = async () => {
