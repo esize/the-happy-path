@@ -24,6 +24,22 @@ export async function deleteUserUseCase(
   await deleteUser(userToDeleteId);
 }
 
+export async function addUserUseCase(
+  username: string,
+  password: string,
+  name: string,
+  role?: "user" | "admin" | "global_admin"
+) {
+  const existingUser = await getUserByUsername(username);
+  if (existingUser) {
+    throw new PublicError("That username is already taken!");
+  }
+
+  await createUser(name, username, password, role);
+
+  return;
+}
+
 export async function registerUserUseCase(username: string, password: string) {
   const existingUser = await getUserByUsername(username);
   if (existingUser) {
@@ -77,6 +93,14 @@ export async function listAllUsersUseCase(): Promise<SafeUser[]> {
     throw new PublicError("Only global admins can list all users");
   }
   return await getAllUsers();
+}
+
+export async function getUserDetailsUseCase(id: number): Promise<SafeUser> {
+  const user = await getUser(id);
+  if (!user) {
+    throw new PublicError("User not found");
+  }
+  return user as SafeUser;
 }
 
 export type SafeUser = {

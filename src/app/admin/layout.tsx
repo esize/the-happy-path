@@ -13,7 +13,7 @@ export default async function AdminLayout({
     <SidebarProvider>
       <AdminSidebar />
       <main className="w-full">
-        <SidebarTrigger className="m-2" />
+        <SidebarTrigger className="fixed bottom-0 m-2" />
         {children}
       </main>
     </SidebarProvider>

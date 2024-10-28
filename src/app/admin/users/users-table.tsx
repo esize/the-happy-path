@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 import {
@@ -33,6 +34,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { cn } from "@/lib/utils";
 import { SafeUser } from "@/use-cases/users";
 
 import { RowActions } from "./row-actions";
@@ -51,6 +53,7 @@ export const columns: ColumnDef<SafeUser>[] = [
       <Checkbox
         checked={row.getIsSelected()}
         onCheckedChange={(value) => row.toggleSelected(!!value)}
+        onClick={(e) => e.stopPropagation()}
         aria-label="Select row"
       />
     ),
@@ -60,17 +63,38 @@ export const columns: ColumnDef<SafeUser>[] = [
   {
     accessorKey: "name",
     header: "Name",
-    cell: ({ row }) => <div className="capitalize">{row.getValue("name")}</div>,
+    cell: ({ row }) => (
+      <Link
+        href={`/admin/users/${row.original.id}`}
+        className="user-link group-hover:underline"
+      >
+        <div className="capitalize">{row.getValue("name")}</div>
+      </Link>
+    ),
   },
   {
     accessorKey: "username",
     header: "Username",
-    cell: ({ row }) => <div>{row.getValue("username")}</div>,
+    cell: ({ row }) => (
+      <Link
+        href={`/admin/users/${row.original.id}`}
+        className="user-link group-hover:underline"
+      >
+        <div>{row.getValue("username")}</div>
+      </Link>
+    ),
   },
   {
     accessorKey: "role",
     header: "Role",
-    cell: ({ row }) => <div>{row.getValue("role")}</div>,
+    cell: ({ row }) => (
+      <Link
+        href={`/admin/users/${row.original.id}`}
+        className="user-link group-hover:underline"
+      >
+        <div>{row.getValue("role")}</div>
+      </Link>
+    ),
   },
   {
     id: "actions",
@@ -170,13 +194,14 @@ export function UsersTable({ data }: { data: SafeUser[] }) {
                   <TableRow
                     key={row.id}
                     data-state={row.getIsSelected() && "selected"}
+                    className="group"
                   >
                     {row.getVisibleCells().map((cell) => (
                       <TableCell
                         key={cell.id}
-                        className={
+                        className={cn(
                           cell.column.id === "actions" ? "text-right" : ""
-                        }
+                        )}
                       >
                         {flexRender(
                           cell.column.columnDef.cell,

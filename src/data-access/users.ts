@@ -38,7 +38,8 @@ async function hashPassword(plainTextPassword: string, salt: string) {
 export async function createUser(
   name: string,
   username: string,
-  password: string
+  password: string,
+  role?: "user" | "admin" | "global_admin"
 ) {
   const salt = crypto.randomBytes(128).toString("base64");
   const hash = await hashPassword(password, salt);
@@ -49,6 +50,7 @@ export async function createUser(
       username,
       password: hash,
       salt,
+      role: role ?? "user",
     })
     .returning();
   return user;

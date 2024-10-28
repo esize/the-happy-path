@@ -42,19 +42,19 @@ export function RowActions<TData>({ row }: RowActionsProps<TData>) {
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>Actions</DropdownMenuLabel>
         <DropdownMenuItem asChild>
-          <Link href={`/users/${row.original.id}`}>
+          <Link href={`/admin/users/${row.original.id}`}>
             <FileText className="mr-2 h-4 w-4" />
             View
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href={`/users/${row.original.id}/edit`}>
+          <Link href={`/admin/users/${row.original.id}/edit`}>
             <Edit className="mr-2 h-4 w-4" />
             Edit
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href={`/users/${row.original.id}/change-password`}>
+          <Link href={`/admin/users/${row.original.id}/change-password`}>
             <Key className="mr-2 h-4 w-4" />
             Change Password
           </Link>

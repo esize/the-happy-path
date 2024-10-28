@@ -46,8 +46,8 @@ export default function RootLayout({
           <div className="flex w-full flex-col">
             <div>{children}</div>
           </div>
+          <Toaster richColors />
         </Providers>
-        <Toaster richColors />
       </body>
     </html>
   );
